@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "vvudem/mutli-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "vvudem/mutli-server",
+            "hostname": "api",
+            "essential": false            
+        },
+        {
+            "name": "worker",
+            "image": "vvudem/mutli-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "vvudem/mutli-nginx",
+            "hostname": "nginx",            
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client","server"]        
+        }
+
+   ]
+}
